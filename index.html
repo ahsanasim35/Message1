@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Valentine ❤️</title>
+<title>میری حقیقی محبت ❤️</title>
 
 <style>
 body {
@@ -12,7 +12,9 @@ body {
   background: radial-gradient(circle, #ff5f6d, #ffc371);
   text-align: center;
   color: white;
-  overflow: hidden;
+  direction: rtl; /* Urdu text right-to-left */
+  overflow-y: auto; /* allow scrolling */
+  padding-bottom: 50px;
 }
 
 /* Title */
@@ -41,7 +43,9 @@ button {
   background: rgba(0,0,0,0.4);
   padding: 20px;
   border-radius: 20px;
-  margin: 10px;
+  margin: 20px;
+  max-width: 90%;
+  word-wrap: break-word;
 }
 
 /* Photos */
@@ -90,27 +94,23 @@ img:hover { transform: scale(1.1); }
 
 <body>
 
-<h1>💖 REESSSHOOO GEE, Will You Be My Valentine? 💖</h1>
+<h1>💖 میری حقیقی محبت عریشہ نعیم، کیا آپ میری محبت بنیں گی؟   💖</h1>
 
-<button id="yesBtn">YES 😍</button>
-<button id="noBtn">NO 😈</button>
+<button id="yesBtn">ہاں 😍</button>
+<button id="noBtn">نہیں 😈</button>
 
 <div id="surprise">
-  <h2>My Love Letter 💌</h2>
+  <h2>میرا محبت نامہ 💌</h2>
   <p>
-    My love,<br>
-    You are my happiness, my peace, and my forever ❤️<br>
-    I promise to always love you and make you smile 😘
+    میری محبت،<br>
+    آپ میری خوشی، میرا سکون، اور ہمیشہ کی محبت ہیں ❤️<br>
+    میں وعدہ کرتا ہوں کہ ہمیشہ آپ سے محبت کروں گا اور آپ کو خوش رکھوں گا 😘
   </p>
 
-  <h3>Our Memories 📸</h3>
-  <img src="photos/wife1.jpeg">
-  <img src="photos/wife2.jpeg">
-  <img src="photos/wife3.jpeg">
-
-
-
-  
+  <h3>ہماری یادیں 📸</h3>
+  <img src="photos/wife1.jpeg" alt="یاد 1">
+  <img src="photos/wife2.jpeg" alt="یاد 2">
+  <img src="photos/wife3.jpeg" alt="یاد 3">
 </div>
 
 <!-- Music (mobile safe) -->
@@ -158,30 +158,6 @@ function launchConfetti() {
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
   }
-}
-
-// Countdown
-const valentineDate = new Date("2026-02-14T00:00:00").getTime();
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = valentineDate - now;
-
-  if (diff < 0) {
-    document.getElementById("countdown").innerHTML = "💖 Happy Valentine’s Day! 💖";
-    return;
-  }
-
-  const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff / (1000*60*60)) % 24);
-  const m = Math.floor((diff / (1000*60)) % 60);
-
-  document.getElementById("countdown").innerHTML = `${d} Days ${h} Hours ${m} Minutes 💕`;
-}, 1000);
-
-// WhatsApp Share
-function shareLove() {
-  const msg = encodeURIComponent("I said YES to being your Valentine ❤️");
-  window.open("https://wa.me/?text=" + msg);
 }
 </script>
 
