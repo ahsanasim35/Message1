@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Valentine ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle, #ff5f6d, #ffc371);
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Title */
+h1 {
+  margin-top: 40px;
+  font-size: 2.3rem;
+}
+
+/* Buttons */
+button {
+  padding: 15px 35px;
+  font-size: 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: bold;
+}
+
+#yesBtn { background: #00c853; color: white; }
+#noBtn  { background: #d50000; color: white; position: absolute; }
+
+/* Surprise Box */
+#surprise {
+  display: none;
+  background: rgba(0,0,0,0.4);
+  padding: 20px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+/* Photos */
+img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 3px solid white;
+  margin: 5px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  transition: 0.3s;
+}
+
+img:hover { transform: scale(1.1); }
+
+/* HEART CONFETTI */
+.confetti-heart {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  transform: rotate(45deg);
+  animation: fall linear forwards;
+}
+
+.confetti-heart::before,
+.confetti-heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: inherit;
+  border-radius: 50%;
+}
+
+.confetti-heart::before { top: -10px; left: 0; }
+.confetti-heart::after  { left: -10px; top: 0; }
+
+@keyframes fall {
+  from { transform: translateY(-10vh) rotate(0deg); }
+  to   { transform: translateY(110vh) rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<h1>💖 REESSSHOOO GEE, Will You Be My Valentine? 💖</h1>
+
+<button id="yesBtn">YES 😍</button>
+<button id="noBtn">NO 😈</button>
+
+<div id="surprise">
+  <h2>My Love Letter 💌</h2>
+  <p>
+    My love,<br>
+    You are my happiness, my peace, and my forever ❤️<br>
+    I promise to always love you and make you smile 😘
+  </p>
+
+  <h3>Our Memories 📸</h3>
+  <img src="photos/wife1.jpeg">
+  <img src="photos/wife2.jpeg">
+  <img src="photos/wife3.jpeg">
+
+
+
+  
+</div>
+
+<!-- Music (mobile safe) -->
+<audio id="music" loop>
+  <source src="music/romentic.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// NO button start position
+const noBtn = document.getElementById("noBtn");
+noBtn.style.left = "45%";
+noBtn.style.top = "55%";
+
+// Move NO button desktop + mobile
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 120);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  if (navigator.vibrate) navigator.vibrate(50);
+}
+["mouseover","touchstart"].forEach(e => noBtn.addEventListener(e, moveButton));
+
+// YES button
+document.getElementById("yesBtn").onclick = () => {
+  document.getElementById("surprise").style.display = "block";
+  document.getElementById("music").play(); // Mobile autoplay FIX
+  launchConfetti();
+};
+
+// HEART CONFETTI PRO
+function launchConfetti() {
+  for (let i = 0; i < 200; i++) {
+    const heart = document.createElement("div");
+    heart.className = "confetti-heart";
+
+    const colors = ["#ff1744", "#ff4081", "#f50057", "#ff80ab"];
+    heart.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random()*3 + 2) + "s";
+    heart.style.opacity = Math.random();
+    heart.style.transform = `scale(${Math.random()+0.5}) rotate(45deg)`;
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+}
+
+// Countdown
+const valentineDate = new Date("2026-02-14T00:00:00").getTime();
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = valentineDate - now;
+
+  if (diff < 0) {
+    document.getElementById("countdown").innerHTML = "💖 Happy Valentine’s Day! 💖";
+    return;
+  }
+
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+
+  document.getElementById("countdown").innerHTML = `${d} Days ${h} Hours ${m} Minutes 💕`;
+}, 1000);
+
+// WhatsApp Share
+function shareLove() {
+  const msg = encodeURIComponent("I said YES to being your Valentine ❤️");
+  window.open("https://wa.me/?text=" + msg);
+}
+</script>
+
+</body>
+</html>
